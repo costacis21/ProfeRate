@@ -21,6 +21,7 @@ if __name__=="__main__":
             username = input("Username: ")
             password = input("Password: ")
             url = command.split(" ")[1]
+            # url='http://localhost:8000'
             uri=url+appurl+command.split(" ")[0]
             try:
                 r = requests.post(uri, data={'username': username, 'password': password})
@@ -70,6 +71,8 @@ if __name__=="__main__":
             if(req[0]=="average" and len(req)==3):
                 uri = url + appurl + req[0]
                 r = requests.post(uri, data={'professor_id': req[1], 'module_code': req[2]})
+                with open("response.html", "wb") as f:
+                    f.write(r.content)
                 response=json.loads(r.text)
                 if 'rating' in response[0]:
                     print(f"The rating of {response[0]['name']} ({response[0]['name_code']}) in module {response[0]['module_name']} ({response[0]['module_code']}) is {response[0]['rating']}")
