@@ -1,0 +1,2 @@
+# ProfeRate
+django uni project
